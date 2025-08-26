@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mario vs Yoshi — Pac‑like Mobile</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --wall: #2f6feb;
+      --pellet: #ffd54a;
+      --power: #ff7ab6;
+      --mario: #ff3b30;
+      --yoshi: #2ecc71;
+      --ink: #e5e7eb;
+      --ui: #a0aec0;
+      --accent: #64d2ff;
+    }
+    html, body { height: 100%; }
+    body {
+      margin: 0; background: radial-gradient(1200px 800px at 20% 20%, #0f1630, var(--bg));
+      color: var(--ink); font-family: system-ui, sans-serif;
+      display: grid; place-items: center;
+    }
+    .wrap { display: grid; gap: 12px; align-items: center; justify-items: center; }
+    canvas { image-rendering: pixelated; image-rendering: crisp-edges; border-radius: 18px; box-shadow: 0 20px 60px rgba(0,0,0,.4), 0 0 0 2px rgba(255,255,255,.06) inset; max-width: 100%; height: auto; }
+    .hud { display: flex; gap: 18px; align-items: center; justify-content: center; flex-wrap: wrap; font-weight: 600; }
+    .hud .pill { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); border-radius: 999px; padding: 8px 12px; }
+    .btns { display: flex; gap: 10px; }
+    button { cursor: pointer; background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03)); color: var(--ink); border: 1px solid rgba(255,255,255,.12); border-radius: 12px; padding: 10px 14px; font-weight: 700; }
+    button:active { transform: translateY(1px); }
+    .hint { color: var(--ui); font-size: 14px; opacity: .9; }
+    .title { font-weight: 900; font-size: 22px; color: white; text-shadow: 0 1px 0 rgba(0,0,0,.5); }
+    .badge { color: var(--accent); font-weight: 800; }/* Pad tactile flottant */
+.pad {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: 60px 60px 60px;
+  grid-template-rows: 60px 60px 60px;
+  gap: 6px;
+  z-index: 999;
+  opacity: 0.7;
+}
+.pad button {
+  font-size: 20px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
+}
+.pad button:active {
+  background: rgba(255,255,255,0.4);
+}
+
+/* Menu d'accueil */
+#menu {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  z-index: 1000;
+  color: white;
+  text-align: center;
+}
+#menu h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+#menu button {
+  font-size: 18px;
+  padding: 12px 20px;
+}
+#menu-logo {
+  width: 180px;
+  height: auto;
+  margin-bottom: 20px;
+  animation: pulse 2s infinite;
+}
+#start-game {
+  animation: pulseBtn 1.5s infinite;
+}
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+@keyframes pulseBtn {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+  </style>
+</head>
+<body>  <!-- Menu d'accueil -->  <div id="menu">
+    <img src="https://www.stickpng.com/assets/images/580b57fcd9996e24bc43c325.png" alt="Logo Mario" id="menu-logo">
+    <h1>Mario vs Yoshi — Pac‑like</h1>
+    <button id="start-game">▶️ Start</button>
+    <button onclick="window.open('https://instagram.com/eth_anb27','_blank')">📸 Créateur</button>
+  </div>  <div class="wrap">
+    <canvas id="gameCanvas" width="448" height="496"></canvas>
+    <div class="hud">
+      <div class="pill">Score: <span id="score">0</span></div>
+      <div class="pill">Vies: <span id="lives">3</span></div>
+    </div>
+  </div>  <!-- Pad tactile -->  <div class="pad">
+    <div></div><button id="up">⬆️</button><div></div>
+    <button id="left">⬅️</button><div></div><button id="right">➡️</button>
+    <div></div><button id="down">⬇️</button><div></div>
+  </div>  <script>
+    const menu = document.getElementById("menu");
+    const startBtn = document.getElementById("start-game");
+
+    startBtn.addEventListener("click", () => {
+      menu.style.display = "none";
+      startGame();
+    });
+
+    function startGame() {
+      // Ici le code du jeu démarre...
+      console.log("Jeu lancé");
+    }
+
+    // Exemple pad tactile qui simule touches
+    function simulateKey(code) {
+      document.dispatchEvent(new KeyboardEvent('keydown', { key: code }));
+    }
+    document.getElementById('up').onclick = () => simulateKey('ArrowUp');
+    document.getElementById('down').onclick = () => simulateKey('ArrowDown');
+    document.getElementById('left').onclick = () => simulateKey('ArrowLeft');
+    document.getElementById('right').onclick = () => simulateKey('ArrowRight');
+  </script></body>
+</html>
